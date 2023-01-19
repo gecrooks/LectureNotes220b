@@ -1,0 +1,143 @@
+
+% !TEX encoding = UTF-8 Unicode
+
+% !TEX TS-program = xelatex
+% !TEX root = Lectures.tex
+ 
+% Compile: 
+%    latexmk -xelatex Disorder.tex 
+% or:
+% 	make build
+% Clean:
+%    latexmk -C
+% or:
+%    make clean
+
+%\documentclass[article,pagebackref,notes]{bespoke6}
+\documentclass[article,notes]{bespoke6}
+\usepackage{bespoke6math}
+\usepackage{mathtools}
+\usepackage{amsmath, amsthm, amssymb}
+\usepackage{graphicx}
+\usepackage{makeidx}
+\usepackage{tikz}
+\usepackage{lipsum}
+\usepackage{subfiles}
+
+%\usepackage{thermonotation}
+
+%\hidenotes					% TODO: Make option
+
+\newcommand{\normalhbadness}{1000}
+\hbadness=\normalhbadness
+
+% == MetaData ==
+\newcommand{\thetitle}{Lectures on Stochastic Thermodynamics}
+\newcommand{\thesubject}{Introduction to the principles and precepts of modern stochastic thermodynamics away from thermodynamic equilibrium}
+
+\newcommand{\theauthor}{Dr.\ Gavin E.\ Crooks}
+
+\IfFileExists{version.txt}{\newcommand{\theversion}{\input{version.txt}}}{\newcommand{\theversion}{beta}}
+
+
+\hypersetup{ 
+	pdfauthor={Dr. Gavin E. Crooks}, 
+	pdftitle={\thetitle} ,
+	pdfsubject={\thesubject}
+}
+
+\renewcommand{\titlemark}{\thetitle, \ G.~E.~Crooks (2023)}
+
+\newcommand{\self}{_disorder}			% Recursive citations.
+\addcitationneeded
+
+
+\usepackage{tikz}
+\usetikzlibrary{automata,positioning}
+\usepackage{adjustbox}
+
+
+\makeindex
+
+% Make sure printindex doesn't start new page.
+% TODO: Add to class
+\makeatletter
+\renewenvironment{theindex}
+               {\section*{\indexname}%
+                \@mkboth{\MakeUppercase\indexname}%
+                        {\MakeUppercase\indexname}%
+                \thispagestyle{plain}\parindent\z@
+                \parskip\z@ \@plus .3\p@\relax
+                \columnseprule \z@
+                \columnsep 35\p@
+                \let\item\@idxitem}
+               {}
+\makeatother
+
+
+\usepackage{subfiles} % Best loaded last in the preamble
+\begin{document}
+
+% Self citation
+%\nocite{\self}
+
+\nocite{}
+
+
+\title{\color{\titlecolor}\thetitle \\ ~  \\ Chem 220B @ UC Berkeley \\ Spring 2023 }
+\author{\href{http://threeplusone.com/}{\theauthor}}
+\date{}
+\maketitle
+\thispagestyle{empty}
+
+~\\
+Instructor: Dr. Gavin E. Crooks \\
+Email: gavincrooks@gmail.com \\
+Office: 319A Gilman \\
+Office Hours: 11-12 Tu, 3:30-4:30 Thr (Or by appointment)\\
+~\\
+GSI: Aditya Singh \\
+Email: ansingh@berkeley.edu\\
+~\\
+Synopsis:~ In this advanced graduate-level course we will discuss contemporary thermodynamics. In contrast to traditional equilibrium thermodynamics and statical mechanics, we are increasingly interested in the dynamical properties of microscopic systems away from thermodynamic equilibrium. We will review driven non-equilibrium thermodynamics, both in linear response and far-from equilibrium and the various dynamics that are used to model reality, and physics of information.
+\\~\\
+Prerequisites: A solid understanding of equilibrium thermodynamics and statistical dynamics (i.e.~Chem 220a). Basic quantum mechanics, linear algebra, and programming.
+\\~\\
+Grading: Grades will be based on 7-8 problem sets (65\%) and a final report (35\%), due during reading week. We will discuss the details of this report as the semester progresses.
+\\~\\
+Discussion Sections: In addition to the regularly schedule lectures, discussion sections will generally be held on a biweekly basis. These sections will be taught by a GSI and will serve as a complement to the lecture with a special emphasis on topics relevant to the problem sets.
+\\~\\
+Textbook:~
+We will not follow a specific textbook. Lecture notes and synopses will be posted through the semester.
+However, the following books may be useful:
+\begin{itemize}
+  \item Luca Peliti \& Simone Pigolotti, Stochastic Thermodynamics: An Introduction
+  \item Robert Zwanzig, Nonequilibrium Statistical Mechanics
+\end{itemize}
+~\\~\\
+Syllabus Outline (tentative):
+\begin{enumerate}
+  \item Information Theory (Including Maxwell's demon and Landauer's principle)
+  \item Thermodynamics (We will review the fundamentals and those aspects that need reconsideration in light of recent developments: work and heat, entropy and free energy, and the nature of thermodynamic equilibrium) 
+  \item Fluctuation Theorems (microscopic reversibility and detailed balance; microscopic, detailed, and integrated fluctuation theorems; various consequences thereof; and experimental realizations)
+  \item Linear response (response to perturbations in the near-equilibrium regime, fluctuation-dissipation theorems, thermodynamic geometry)
+  \item Dynamics (Interspersed through the semester, we will discuss various models of reality, including DTMC, CTMC, classical dynamics, Langevin dynamics, molecular dynamics, and quantum processes)
+  \item Advanced Topics (TBD, depending on time)
+  \item Guest Lectures (Contemporary thermodynamics as practiced by those at the frontiers of research)
+\end{enumerate}
+
+\newpage
+
+%\tableofcontents
+
+%\input{Colophon}     % TODO: Move?
+
+
+%
+%
+% == Appendices & Backmatter ==
+%\appendix
+%
+
+
+\end{document}

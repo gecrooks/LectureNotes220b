@@ -5,7 +5,7 @@
 % !TEX root = Lectures.tex
  
 % Compile: 
-%    latexmk -xelatex Disorder.tex 
+%    latexmk -xelatex Lectures.tex 
 % or:
 % 	make build
 % Clean:
@@ -24,7 +24,11 @@
 \usepackage{lipsum}
 \usepackage{subfiles}
 
-%\usepackage{thermonotation}
+
+\usepackage{thermonotation}
+
+
+
 
 %\hidenotes					% TODO: Make option
 
@@ -90,6 +94,9 @@
 \maketitle
 \thispagestyle{empty}
 
+\tableofcontents
+\section{Lectures on Stochastic Thermodynamics}
+
 ~\\
 Instructor: Dr. Gavin E. Crooks \\
 Email: gavincrooks@gmail.com \\
@@ -111,8 +118,8 @@ Textbook:~
 We will not follow a specific textbook. Lecture notes and synopses will be posted through the semester.
 However, the following books may be useful:
 \begin{itemize}
-  \item Luca Peliti \& Simone Pigolotti, Stochastic Thermodynamics: An Introduction
-  \item Robert Zwanzig, Nonequilibrium Statistical Mechanics
+  \item Luca Peliti \& Simone Pigolotti, Stochastic Thermodynamics: An Introduction \cite{Peliti2021a}
+  \item Robert Zwanzig, Nonequilibrium Statistical Mechanics \cite{Zwanzig2001a}
 \end{itemize}
 ~\\~\\
 Syllabus Outline (tentative):
@@ -128,16 +135,27 @@ Syllabus Outline (tentative):
 
 \newpage
 
-%\tableofcontents
+
+
+\clearpage
+
 
 %\input{Colophon}     % TODO: Move?
 
+\subfile{ChLectureSummary}
 
-%
-%
+\part{Notes on Stochastic Thermodynamics}
+\subfile{Ch01Prob}
+
 % == Appendices & Backmatter ==
-%\appendix
-%
+\appendix
+
+
+%\subfile{ChNotes}
+
+
+
+\subfile{ChBibliography}
 
 
 \end{document}

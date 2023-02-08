@@ -1,0 +1,40 @@
+
+% !TEX encoding = UTF-8 Unicode 
+% !TEX TS-program = xelatex
+% !TEX root = Disorder.tex
+ 
+\documentclass[Lectures]{subfiles}
+\begin{document}
+
+
+
+
+\clearpage
+ % =======================================================================
+\phantomsection
+
+\renewcommand{\refname}{Bibliography} %Chronological
+
+\renewcommand{\bibAnnote}[2]{{\newline\rlap{\hspace*{-1em}$\circ$}#2 \note{#1}}}
+\newcommand{\bibAnnoteFile}[1]{\note{#1}}
+\renewcommand{\doi}[1]{\href{http://dx.doi.org/#1}{\nolinkurl{doi:#1}}}
+\urlstyle{same}
+\newcommand{\Star}{\rlap{\hspace*{-2em}\Large\color{red}${\star}$}} % Important papers well worth reading.
+
+\newcommand{\arxiv}[1]{{arXiv}:\href{http://arxiv.org/abs/#1}{#1}}
+
+
+\renewcommand{\bibpreamble}{\noindent
+%{\Large\color{red}$\star$} Great papers that have been, will be, or should be influential.
+}
+
+\addcontentsline{toc}{section}{\refname}
+
+\tightstretch \small
+\hbadness=10000		% turn off underfull warnings
+\bibliography{gec_bibliography,Bib_no_edit}
+\hbadness=\normalhbadness % Restore default
+\normalsize \normalstretch
+
+
+\end{document}

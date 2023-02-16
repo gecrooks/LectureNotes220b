@@ -1,0 +1,335 @@
+% !TEX encoding = UTF-8 Unicode 
+% !TEX TS-program = xelatex
+
+\documentclass[Lectures.tex]{subfiles}
+\begin{document}
+
+
+%\newcommand{\para}[1]{\paragraph*{#1~\hspace{-1em}}\addcontentsline{toc}{subsection}{#1}}
+%\newcommand{\given}{\mathrel{\vert}}
+
+\section{Entropy}
+
+
+The concept of entropy was first discovered by Rudolf Clausius in the 1860s~\cite{???,???}. He realized that an equilibrium  thermodynamic system was characterized both a conserved quantity, the energy of the system, but also by another quantity, which he named entropy, that is not conserved, but instead tends towards a maximum. 
+
+Clausius envisioned entropy as a physical substance, much like energy, and this perspective persisted in macroscopic thermodynamics for many years. But the early pioneers of probabilistic thinking in physics (most notable Maxwell, Boltzmann, and Gibbs), soon realized that entropy is essentially statistical in nature.  We see the first formulations of entropy in terms of probabilities in Boltzmann's works~\cite{???,???} (and the formula $S=\ln \Omega$ is inscribed on his tomb), followed by the general definition of thermodynamic entropy in Gibbs's magnum opus laying down the foundations of statistical mechanics~\cite{???}. 
+
+As thermodynamics and statistical mechanics developed during the first half of the 20th century, physicists continued to think of entropy as primarily a property of physical systems at thermodynamic equilibrium. This began to change with  Claude Shannon's development of information theory in the 1940s. Shannon was concerned with developing a mathematical theory of communication. He needed a quantitative measure of the information of a message to be transmitted, and in doing so he rediscovered the entropy formulas of Boltzmann and Gibbs, but shorn of all irrelevant physics~\footnote{}. Entropy is not a property of a system as such, but rather of the ensemble, the probabilities  that the system of interest can be found in different states.
+
+It took many years for Shannon's insights to be fully incorporated into thermodynamics. Jaynes\cite{???,???} was an early and vocal proponent of placing Shannon's conception of entropy at the heart of statistical mechanics. The equivalence of Shannon and thermodynamic entropies was most convincingly demonstrated by the work of Bennet and Landauer~\cite{???,???}. The equivalence of Shannons information entropy and Clausius thermodynamic entropy is now known as Landauer's principle. They have to be equivalent or thermodynamics itself stops being consistence. 
+
+%TODO: Incorporate into previous section
+%\subsection{Probabilities and Ensembles}
+%Probabilities are numerical measures of how certain we are that  particular logical propositions are true.  By convention a value of $0$ represents certainly false, and $1$ certainly true.
+%An {\sl ensemble} $A$ (or {\sl probability space})  consists of a complete and mutually exclusive set of propositions ${A_x}$ indexed by a sample space $x\in\Omega_A$, and for each proposition a probability, written $P(A=x)$ or $P_A(x)$ (Verbalized as ``the probability that $A$ equals (or is)  $x$''). We'll typically use upper case roman letters for ensembles, and lower case roman for samples
+%
+%%\footnote{It is tempting, and sometimes useful, to use the corresponding upper and lower case letters for ensembles and samples, e.g. $P_A(a)$. But this leads to the awkward verbalizations such as ``the probability that AYE equals aye''}.
+%
+%
+%%Probabilities represent truthiness, where by convention a value of $0$ represents certainly false, and $1$ certainly true. Thus
+%
+%An ensemble represents all the possible configurations of a given system. For example, if we ask about the outcome of a coin toss, then the system is the coin, and the ensemble $C$ consists of two states (or outcomes, or samples), "heads up" and "tails up", two propositions "Coin is heads up" and "Coin is tails up", and the corresponding probabilities $P_C(\text{head})$ and $P_C(\text{tails})$.
+%
+%The probabilities of our collection of propositions are non-negative, and sum to 1 (since it is certainly true that one of the propositions is true).
+%\[
+%&P_A(x) \geq 0 \text{ for all } x \text{ in } \Omega_A \\
+%& \sum_{x\in\Omega_A} P_A(x) = 1
+%\]
+%If the sample space isn't explicitly specified, e.g.~$\sum_{x}P_A(x) =1$, then the sum is implicitly over the entire relevant
+%sample space.
+%
+%
+%Note that probabilities $P_A(x)$ are functions of both the outcome $x$ and the ensemble $A$. Different coins have the same same state space of heads and tails, but different propensities for tails up, and are represented by different ensembles. But when there is only one ensemble for each sample space in a problem, then it's common to drop the ensemble, and write $P(x)$ for $P_A(x)$, and $P(y)$ for $P_B(y)$. However, we won't use this shorthand in this tomb because we will often have to deal with many distinct ensembles that share the same sample space. 
+%
+%When we don't need the formality of ensembles of propositions, we can treat probabilities are ordinary functions, e.g.~$p(x)$, $q(x)$, or $\text{Normal}(x;\mu, \sigma)$. In the last case we've use a semicolon to separate the samples from the fixed parameters of the probability distribution. 
+%
+%A \define{joint ensemble} $AB$ is an ensemble where outcomes are ordered pairs of values $\{x,y\}$. For instance, the ensemble could consist of picking the top two cards from a shuffled deck. The two variables are not necessarily independent, and we write the \define{joint probability} as $P_{AB}(x, y)$. By summing over one variable, we obtain the \define{marginal probability}\footnote{The term `marginal probability' comes from writing the joint probability as a rectangular array of numbers, and then writing the sums of the rows and columns in the left and top margins.} of the other variable
+%\[
+% P_A(x) = \sum_y P_{AB}(x,y) \\
+% P_B(y) = \sum_x P_{AB}(x,y)
+%\]
+%In these cases $A$ and $B$ are marginal or sub-ensembles of the joint ensemble $AB$. If the joint probabilities is the product of the marginal probabilities, $P(x,y) = P(x)P(y)$, then there are no inter-ensemble correlations and we say that the ensembles are \define{independent}.
+%
+%A \define{conditional probability} is the probability of one observation $x$ given knowledge of another $y$. Probabilities depend on what we know. The probability that the second drawn card is an ace depends on if we know that first card was an ace. Or suppose I toss a fair coin. Before the toss the probabilities are even. After the toss, but before I look at the coin, the probabilities are still even. But if I peak at the coin, but conceal the coin from you, then my probabilities are either 100\% heads, or 100\% tails, whereas your probabilities (without knowledge of the coin toss result) are still even. 
+%
+%We write conditional probabilities as $P_{AB}(x\given y)$ which is verbalized as ``the probability that $A$ is $x$ given $B$ is $y$'' (Or ``pee of x given y`` for short).% the bar is verbalized as `given'.
+%\[
+%P_{AB}(x \given y) = \frac{P_{AB}(x,y)}{P_B(y)}
+%\]
+%A slight rearrangement gives us the \define{chain rule of probabilities}
+%\[
+%P_{AB}(x,y) = P_{AB}(x\given y) P_B(y)
+%\]
+%and another minor manipulation leads us to the celebrated \define{Bayes' theorem}.
+%\[
+%P_{BA}(y\given x) = \frac{P_{AB}(x\given y) P_B(y)}{P_A(x)} 
+%\]
+%These last three relations all express (in slightly different ways) the key concept that joint, conditional, and marginal probabilities are interrelated. 
+
+\subsection{Bits and bytes}
+
+A \define{bit} is the fundamental irreducible unit of information storage. 
+Essentially any physical system with two distinct, stable states can constitute a bit. We could label these states head and tails (if the bit is a coin), or up and down (for an electron spin), or on and off, or yes and no, or true and false. Most commonly we call the two states zero and one. 
+
+Suppose we want to record the state of some other physical system. How many bits of memory will we need?
+For instance, suppose we have a collection of $N$ coins, each of which is either heads up or tails up. 
+Since these coins are themselves two-state systems it seems evident that we'll require $N$ bits. But what if, instead of a coins, we have $N$ 10-sided dice?  The dice system has $10^N$ distinct states, so we'll need enough bits $S$ so that the total number state of the bits $2^S$ is greater or equal to the states of the dice $10^N$. Taking binary logarithms, the number of bits is at least
+\[
+S =  \log_2 10^N = N \log_2 10
+\]
+If $S$ is fractional, we'll have to round up to the next integer. We need 3 bits for 1 die, 10 bits for 3 dice, 20 bits for 6 dice, as so on. Asymptotically, for large $N$ we need $\log_2 10\approx 3.32$ bits per digit. More generally, we say that the {\sl entropy} of a system with $N$ distinct, equiprobable states is
+\[
+S = \log_b N 
+\]
+where $b$ is the base of the logarithm. The units of entropy depend on which logarithmic base we choose. If we use base 10, then entropy is measured in digits (or bans). In computer science we most commonly use base 2, and measure entropy in bits (binary digits), whereas in physics it turns out to be most convenient to use natural logarithms (base $e$), and measure entropy in nats (natural units).
+
+[properties of logarithms] 
+
+
+To convert between bits, nats, and bans, it is useful to remember the approximation that \[
+2^{10}\approx e^7 \approx 10^3 \]
+The exact numbers are $1024\approx 1096.63\ldots \approx 1000$. 
+This means that 10 bits is about 7 nats is about 3 digits. Also a kilobyte is about $2^{10}$ bytes, a megabyte is about $2^{20}$ bits, a gigabyte is about $2^{30}$ bytes, and so on. A byte is the normal unit of computer memory, which in modern usage is 8 bits. This size was chosen because $8=2^3$ is a nice round number, and $2^8=256$ is more than enough code points to encode all the digits, and upper and lower case Roman letters, plus a bunch of punctuation marks and control codes.
+
+
+Note that the word 'bit' is overloaded. Bit refers both to the physical storage medium (i.e.~a two state system) and the unit of entropy.  It perfectly reasonable to have half a bucket of water, but half a bucket is nonsensical (Either it's not a bucket, if you cut vertically, or a smaller bucket, if you cut horizontally). Similarly, we can't have half a bit, but we can have half a bit of entropy\footnote{Some helpful pedantics have  suggested that  we replace {\sl bit} with {\sl shannon} as the unit of entropy. Thankfully, this proposal has not caught on.}. 
+
+[Physical units]
+[Kibibytes]
+
+\begin{table}
+\centering
+\caption{Units of entropy}
+\begin{tabular}{lrlll}
+\\
+deciban &$\tfrac{1}{10}\log_2(10) \approx 0.33$ bits  & tenth of a ban \\
+bit (shannon)    & 1 bit\phantom{s} & ~ &  \\
+nat  (nit, nepit)  &  $\log_2(e) \approx 10/7$ bits & natural digit \\
+trit & $\log_2(3)\approx 1.6$ bits & ternary digit &\\
+quad & 2 bits & & \\
+ban (digit, hartly) & $\log_2(10) \approx 10/3$ bits & decimal digit\\
+nibble (nybble) & 4 bits & half a byte \\
+byte & 8 bits &  & \\
+kilobyte & $10^3$  bytes &  $\approx 2^{10}$ bytes& \\
+megabyte & $10^6$ bytes & $\approx 2^{20}$ bytes & \\
+gigabyte & $10^9$ bytes & $\approx 2^{30}$ bytes & \\
+terabyte & $10^{12} $ bytes & $\approx 2^{40} $ bytes & \\
+%kibibyte & $2^{10}$  bytes &  $ =1024$ bytes& \\
+%mebibyte & $2^{20}$ bytes & \\
+%gibibyte & $2^{30}$ bytes & \\
+%tebibyte & $2^{40}$ bytes & 
+\end{tabular}
+\end{table}
+
+
+\subsection{Logarithms}
+It's worth reviewing the properties of logarithms. The logarithm is the inverse function to exponentiation,
+\[
+\log_b(b^x) = x, \qquad b^{\log_b x} = x
+\]
+where $b>1$ is the {\sl base} of the logarithm\footnote{You could define the base to be any positive number, but we exclude fractional bases because  we never need them, and some logarithmic properties become more complicated for sub-unity bases.}. We'll write base $2$ ``binary'' logarithms as $\lg(x)\equiv\log_2(x)$, and base $e (\approx 2.71...)$ ``natural'' logarithms as $\ln(x)\equiv\log_e(x)$. When the base doesn't matter (except being consistent across an expression), we'll simple write  $\log(x)$.
+
+[tk figure]
+
+Logarithms turn products into sums and quotients into differences,
+\begin{align*}
+\log_b(xy) &= \log_b(x) + \log_b(y)  \\
+\log_b(\frac{x}{y}) & = \log_b(x) - \log_b(y) 
+\end{align*}
+and exponents of the argument scale the logarithm.
+\[
+\log_b(x^k) = k\log_b(x)
+\]
+Conversely exponentiation turns addition into multiplication
+\[
+    b^{xy} = b^x\ b^y = (b^x)^y
+\]
+
+Scaling a logarithm by a constant changes the base of the logarithm.
+\[
+	\log_{b}(x)=\log_{b}(c) \log_c(x)
+\]
+To see why, exponentiate both sides to base $b$,
+\begin{align*}
+	b^{\log_{b}(x)}&=b^{\log_{b}(c) \log_c(x)}\\
+	x & = (b^{\log_{b}(c)})^{\log_c(x)} \\
+	x & =c^{\log_c(x)}\\ 
+	x & =  x
+\end{align*}
+The conversion factor between base $2$ and base $e$ is about $7/10$, and between base $2$ and base $10$ about $3/10$.
+\begin{align*}
+	\ln(x) &= \ln(2) \lg(x)\quad\  \approx 0.693 \lg(x) \\
+	\log_{10}(x) &= \log_{10}(2) \lg(x) \approx 0.301 \lg(x)
+\end{align*}
+
+The derivative of a logarithm is 
+\begin{align*}
+\frac{d}{dx}\log_b(x) &= \frac{1}{\ln(b)}\frac{1}{x} \\
+& = \frac{1}{x} \ \text{for natural logarithms}
+\end{align*}
+and the integral
+\begin{align*}
+\frac{d}{dx}\log_b(x) &= \frac{1}{\ln(b)}\frac{1}{x} \\
+& = \frac{1}{x} \ \text{for natural logarithms}
+\end{align*}
+
+
+\subsection{Entropy}
+[transition. Averages]
+
+The \define{entropy} is a measure of the inherent information content of an ensemble. It is the average number of bits (or other unit of information) that is needed to record the state of the system. 
+\begin{align}
+\label{Entropy}
+ S(A) = -\sum_a P(A_a) \log_b P(A_a) 
+\end{align}
+In information theory the entropy is typically denoted by the symbol $H$, a notation that dates back to Boltzmann and his $H$-theorem~\cite{Boltzmann1872a}, and adopted by Shannon~\cite{Shannon1948a}. The notation $S$ is due to Clausius and the original discovery of entropy in thermodynamics~\cite{Clausius1865a}\footnote{Nobody knows why Clausius chose $S$ for entropy. It's been suggested that his choice may have been in tribute to {\sl S}adi Carnot, but that's pure speculation.}, and adopted by Gibbs~\cite{Gibbs1902a} for use in statistical mechanics. I tend to use $S$ since I care about the physics of information, and we often need the symbol $H$ to denote the Hamiltonian.
+% TODO: Wait, did Gibbs use S?
+
+Entropies of discrete distributions are non-negative and bounded. The minimum occurs when one outcome is certain (and all other states have zero probability. The maximum arrises when all states of the ensemble have the same probability~\footnote{We'll postpone proving the such inequalities until we discuss relative entropy and Jensen's inequality \pageref{???}}.
+\[
+0 \leq S(A)   \leq \ln |\Omega_A |
+\notag
+\]
+Note that the entropy of a continuous distribution can be negative, as we'll discuss in sec??.
+
+Given a joint probability distribution $P_{AB}(x, y)$ then the \define{joint entropy} is
+\begin{align}
+\label{joint}
+S(A,B) = -\sum_{x,y} P_{AB}(x, y) \ln P_{AB}(x, y)
+\end{align}
+This joint entropy can be readily generalized to any number of variables.
+\begin{align}
+\notag 
+S&(A_1, A_2, \ldots, A_n) 
+\\ \notag
+& = -\smashoperator{\sum_{x_1,x_2,\ldots,x_n}} P_{A_1 A_2 \ldots A_n}({x_1}, {x_2}, \ldots, {x_n}) \ln P_{A_1 A_2 \ldots A_n}({x_1}, {x_2}, \ldots, {x_n})
+\end{align}
+
+
+The \define{marginal entropy} is the entropy of a marginal ensemble. Thus $S(A)$, $S(B)$, $S(C)$, $S(A,B)$, $S(B,C)$ and $S(A,C)$ are all marginal entropies of the joint entropy $S(A,B,C)$.
+
+
+
+The conditional entropy measures how uncertain we are (on average) about $A$ when we know the state of $B$.
+\begin{align}
+\label{cond}
+S(A\given B) 
+& = -\sum_{b} P_B(b) \sum_{a}  P_{AB}(a \given b) \ln P_{AB}(a\given b) \\
+& = -\sum_{ab}  P_{AB}(a, b) \ln P_{AB}(a\given b) \notag
+\end{align}
+The conditional entropy is non-negative, since it is the expectation of non-negative entropies. 
+
+The \emph{chain rule for entropies}~\cite{Shannon1948a, Cover2006a}\index{chain rule !  entropy}   follows from the probability chain rule~\eqref{???},
+\[
+S(A,B) & = S(A\given  B) +S(B)  \ .
+\]
+It follows that conditioning always reduces entropy, $S(A\given  B) \leq  S(A)$ and therefore
+that entropy is  {\sl subadditive}: The joint entropy is less than the sum of the individual entropies (with equality if and only if $A$ and $B$ are independent).
+\[
+ S(A, B) \leq S(A) + S(B)
+\]
+
+
+\clearpage
+\section{Information}
+
+
+\subsection{Mutual Information}
+% Entropy is occasionally referred to as the self-information, since entropy is equal to the mutual information between a distribution and itself, $S(A) = I(A:A)$. This is distinct from the specific entropy \eqref{specific} which is also sometimes referred to as the self-information.
+
+
+\[
+I(A:B) = \sum_{x,y} P_{AB}(x,y) \ln \frac{P_{AB}(x,y)}{P_A(x) P_B(y)}
+\]
+
+
+
+
+
+\def \setA{ (0,0) circle (1cm) }
+\def \setB{ (1,0) circle (1cm) }
+\def \setC{ (60:1) circle (1cm) }
+
+
+\begin{figure}[htbp]
+\begin{center}
+\scalebox{0.75}{
+\begin{tikzpicture}
+       \begin{scope} \fill[lightgray] \setA; \end{scope}
+	\draw \setA +(-1,-1) node {$A$}; 
+	\draw \setB +(+1,-1) node {$B$};
+	\draw (-3,0) node[right] {$S(A)$};
+	\draw (4.25,0) node[left] {};			
+\end{tikzpicture}
+}
+\scalebox{0.75}{
+\begin{tikzpicture}
+       \begin{scope} \fill[lightgray]  \setB; \end{scope}
+	\draw \setA +(-1,-1) node {$A$}; 
+	\draw \setB +(+1,-1) node {$B$};
+	\draw (-3,0) node[right] {$S(B)$};	
+	\draw (4.25,0) node[left] {};		
+\end{tikzpicture}
+}
+\scalebox{0.75}{
+\begin{tikzpicture}
+       \begin{scope} \fill[lightgray] \setA ; \fill[lightgray] \setB; \end{scope}
+	\draw \setA +(-1,-1) node {$A$}; 
+	\draw \setB +(+1,-1) node {$B$};
+	\draw (-3,0) node[right] {$S(A,B)$};	
+	\draw (4.25,0) node[left] {};	
+\end{tikzpicture}
+}
+\scalebox{0.75}{
+\begin{tikzpicture}
+       \begin{scope}  \clip \setA; \fill[lightgray] \setB; \end{scope}
+	\draw \setA +(-1,-1) node {$A$}; 
+	\draw \setB +(+1,-1) node {$B$};
+	\draw (-3,0) node[right] {$I(A:B)$};	
+	\draw (4.25,0) node[left] {};	
+\end{tikzpicture}
+}
+\scalebox{0.75}{
+\begin{tikzpicture}
+       \begin{scope}  \fill[lightgray] \setA; \end{scope}
+       \begin{scope}  \clip \setB; \fill[white] \setA; \end{scope}
+	\draw \setA +(-1,-1) node {$A$}; 
+	\draw \setB +(+1,-1) node {$B$};
+	\draw (-3,0) node[right] {$S(A\given B)$};	
+	\draw (4.25,0) node[left] {};	
+\end{tikzpicture}
+}
+\scalebox{0.75}{
+\begin{tikzpicture}
+       \begin{scope}  \fill[lightgray] \setB; \end{scope}
+       \begin{scope}  \clip \setA; \fill[white] \setB; \end{scope}
+	\draw \setA +(-1,-1) node {$A$}; 
+	\draw \setB +(+1,-1) node {$B$};
+	\draw (-3,0) node[right] {$S(B\given A)$};
+	\draw (4.25,0) node[left] {};	
+\end{tikzpicture}
+}
+
+\caption[Two-variable information diagrams]{Two-variable Information diagrams~\cite{Yeung1991a,James2011a}.}
+\end{center}
+\end{figure}
+
+\subsection{Relative Entropy}
+
+\[
+D(A\|B) =  \sum_x P_{A}(x) \ln \frac{P_A(x)}{P_B(x)}
+\]
+
+\subsection{Differential entropy}
+
+
+\subsection{Order and disorder}
+
+
+\subsection{Further Reading}
+
+
+
+\end{document}
+

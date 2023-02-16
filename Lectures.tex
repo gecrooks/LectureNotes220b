@@ -5,7 +5,7 @@
 % !TEX root = Lectures.tex
  
 % Compile: 
-%    latexmk -xelatex Disorder.tex 
+%    latexmk -xelatex Lectures.tex 
 % or:
 % 	make build
 % Clean:
@@ -24,7 +24,11 @@
 \usepackage{lipsum}
 \usepackage{subfiles}
 
-%\usepackage{thermonotation}
+
+\usepackage{thermonotation}
+
+
+
 
 %\hidenotes					% TODO: Make option
 
@@ -85,10 +89,14 @@
 
 
 \title{\color{\titlecolor}\thetitle \\ ~  \\ Chem 220B @ UC Berkeley \\ Spring 2023 }
-\author{\href{http://threeplusone.com/}{\theauthor}}
+\author{\href{http://threeplusone.com/}{\theauthor}\\~\\ \url{https://github.com/gecrooks/LectureNotes220b}}
 \date{}
 \maketitle
 \thispagestyle{empty}
+
+\tableofcontents
+\clearpage
+\section{Lectures on Stochastic Thermodynamics}
 
 ~\\
 Instructor: Dr. Gavin E. Crooks \\
@@ -111,8 +119,8 @@ Textbook:~
 We will not follow a specific textbook. Lecture notes and synopses will be posted through the semester.
 However, the following books may be useful:
 \begin{itemize}
-  \item Luca Peliti \& Simone Pigolotti, Stochastic Thermodynamics: An Introduction
-  \item Robert Zwanzig, Nonequilibrium Statistical Mechanics
+  \item Luca Peliti \& Simone Pigolotti, Stochastic Thermodynamics: An Introduction \cite{Peliti2021a}
+  \item Robert Zwanzig, Nonequilibrium Statistical Mechanics \cite{Zwanzig2001a}
 \end{itemize}
 ~\\~\\
 Syllabus Outline (tentative):
@@ -128,16 +136,25 @@ Syllabus Outline (tentative):
 
 \newpage
 
-%\tableofcontents
-
-%\input{Colophon}     % TODO: Move?
 
 
-%
-%
+\clearpage
+\subfile{ChLectureSummary}
+
+
+\clearpage
+\subfile{ChProb}
+\subfile{ChEntropy}
 % == Appendices & Backmatter ==
 %\appendix
-%
+
+
+\clearpage
+\subfile{ChNotes}
+
+
+
+\subfile{ChBibliography}
 
 
 \end{document}

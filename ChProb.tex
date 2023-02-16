@@ -1,0 +1,138 @@
+% !TEX encoding = UTF-8 Unicode 
+% !TEX TS-program = xelatex
+
+\documentclass[Lectures.tex]{subfiles}
+
+
+
+
+\begin{document}
+
+
+\section{Probability and ensembles}
+
+
+\subsection{The Coin Toss}
+Suppose I present to you a coin, one side of which we will call heads, and one tails. I propose to perform a fair coin toss. Let's assume that it's not a trick coin, and I'm not a magician. What are the chances that the coin will come down heads up? Under these circumstances, with this information, the only reasonable answer is that the coin with come up heads or tails equally often. Of course, the coin may be biased, and come down on one side or the other more often. But we can't know which side is more likely unless we preform experiments on this particular coin. So I have to assign equal chances to both possibilities, since the labels are essentially arbitrary and changing the labels shouldn't change anything. 
+
+Now suppose I toss the coin, snatch it out of the air, and slap the coin onto the back of my left hand, concealed the top face with my right hand, as tradition dictates. Neither you nor I have fast enough perception to see which way the coin fell.  So what now are the chances that the coin is heads? The only reasonable answer is that the chances have not changed. 
+
+I now peak at the coin under my hand, but continue to conceal the coin from yourself. What are the chances that the coin is heads up? It depends. For myself, the coin is now either definitely heads up, or definitely tails up. But for yourself, the chances remain even. 
+
+We represent probabilities by numerical measures between 0 and 1 (with 0 representing certainly false, and 1 certainly true). These probabilities are not properties of the system itself (here the system of interest is the coin). Rather probabilities {\sl contextual}\footnote{Jaynes described probabilities as {\sl subjective} rather than {\sl contextual}. But  the word {\sl subjective} carries a lot of unwarranted connotations. We're not irrational, just ill-informed and short of time.}; they depend on what we know about the system, and since you and I can have different knowledge our probabilities for the same event can be different. 
+
+
+\subsection{Prime Numbers}
+Suppose I present to you a random 30 digit number:
+
+\begin{center}
+192339819110572236368487297967
+\end{center}
+
+What are the chances that this number is prime? In a Platonic sense this number is either prime, or not prime, and has always been prime (or not prime) since the beginning of time. Asking if this number is prime is purely a question about our mathematical ignorance.  But if we know a bit of mathematics, then we'd know the {\sl prime number theorem}, which states that the probability of a random number $N$ being prime is about
+\[
+	P(N\text{ is prime}) \approx \frac{1}{\ln N}
+\]
+which is about 1 in 70 for a 30 digit number. 
+
+Proving that a large number is prime is hard. However, number theorists have developed fast prime number tests that can tell you with near certainty if a number is prime (or not), provided we are able and willing to expend a modest amount of computational power. Our number turns out to be almost certainly prime~\footnote{Probably. We also have to factor in the odds that I was able to faithfully transcribed the original prime to the page or blackboard.}.
+
+Probabilities depend not just on our knowledge of the system, but also on our understanding of reality (in this case, how much number theory we know), and on how much compute we throw at the problem. 
+
+% Prime numbers are not rare.
+
+
+\subsection{Probability theory}
+
+Probability theory is a physical theory of plausible reasoning in a classical universe. Probability theory is often treated as  branch of pure mathematics, but the fundamental assumptions include a physical model of reality corresponding to classical, pre-quantum physics. Probabilities are contextual, in that one's assignment of probabilities depends on what you know. But objective in that different rational observers with the same information, model, and computational resources should come to the same conclusions, and assign the same probabilities.
+
+\paragraph{Propositions}
+A {\sl proposition} or {\sl statement} is a logical assertion that may be true or false. Examples include ``All men are mortal'', ``Socrates is a man'', and ``When I flip this coin, it will land with the tail side up''.  I'll tend to use lower case letters from the beginning of the alphabet for propositions: $a,b,c$. (Upper case letters are common in the literature, but we'll reserve those for ensembles, defined below.)  A {\sl conditional proposition}
+ $a\given h$ (``$a$ given $h$'') is an assertion `$a$' premised on some other data or hypothesis `$h$'. In principle all propositions are conditional, although conditions constant across an expression are typically not stated explicitly.
+
+
+\paragraph{Boolean algebra}
+The elementary Boolean operations are negation (not), conjugation (and) and disjunction (or). Note that logical `or' means `either or both', which differs from colloquial English usage. Below are the truth tables of the three basic logic elements, along with some of the different notations that you may encounter.
+%We can also write the negation of a proposition as either $\bar{a}$, $a^c$ or $\neg a$. 
+%The 9 axioms of Boolean algebra are listed in table~\ref{booleantable}. (Pairs of axioms on the same line are equivalent and interchangeable. Pick one.) In practice its easier to consider the truth tables of the three basic logic elements. 
+
+%\todo{Why are and or not universal?}
+
+\begin{center}
+\begin{tabular}{cc|ccc}
+$a$ & $b$ & $\lnot a$ & $ a \land b$ &$a \lor b $\\
+& & $\neg a$ & $ a \vee b$ &$a \wedge b $\\
+& & $\sim a$ & $ a~\&~b$ & $a~\vert~b$  \\
+\hline
+false & false & true & false & false \\
+false & true &  & false & true \\
+true & false &  false &  false & true \\
+true & true &  & true  & true
+\end{tabular}
+\end{center}
+
+
+
+% As a working philosophy, we'll adopt the view that probability theory as an extension of Aristotelian logic ---an {\sl objective Bayesian} interpretation. 
+
+\paragraph{Probability}
+A {\sl probability}  is a numerical measure of the plausibility of a logical proposition $a$, given the hypothesis (data or evidence) $h$, written $\Pr(a\given h)$ and verbalized  ``the probability of $a$ given $h$''. Probability satisfies the following three rules.
+
+\noindent (1) Convexity rule:
+\begin{align*}
+\Pr(a\given h) & \text{ is a real number between zero and one.}
+\\ \notag
+& \text{with one representing certain truth.}
+%\text{(2) Negation rule}
+%\\
+%\Pr (a) & = 1 - \Pr(a^c)
+%\\
+\end{align*}
+(2) Product rule: 
+\begin{align*}
+\Pr(a \land b\given  h) &= \Pr(b \given a \land   h) \Pr(a\given h)
+\end{align*}
+(3) Sum rule:
+\begin{align*}
+\Pr(a \lor  b \given h ) & = \Pr(a\given h) + \Pr(b\given h) - \Pr(a \land b\given h)
+\end{align*}
+One immediate and useful consequence is {\sl Bayes' rule}
+\[
+\Pr(a \given b ) = \frac{\Pr(b\given a) P(a)}{P(b)}
+\]
+
+A comma between propositions is taken to be equivalent to a conjunction of the propositions. 
+\[\Pr(a,b\given h) \equiv \Pr(a \land b\given h)\]
+%We will need to use semicolons or other punctuation in lists of propositions or ensembles.
+
+
+
+
+
+%\paragraph{Probabilities}
+%
+%
+%Probabilities are numerical measures of our uncertainty. 
+%Each probability is a number between 0 and 1 that describes the likelihood of a particular proposition, where {\sl propositions} is a logical assertion that may be true or false. Examples include ``All men are mortal'', ``Socrates is a man'', and ``When I flip this coin, it will land with the head side up''. 
+%A probability of 0 means that the proposition is certainly false, while a probability of 1 means that a proposition is certainly true, with values in between representing varying levels of uncertainty.
+%
+%
+%Probability theory is often treated as a branch of pure mathematics, but the fundamental assumptions implicitly assume a physical model of reality corresponding to classical, pre-quantum physics. A physical theory of plausible reasoning in a classical universe. 
+%
+%
+% As a working philosophy, we'll adopt the view that probability theory as an extension of Aristotelian logic ---an {\sl objective Bayesian} interpretation. Probabilities are contextual\footnote{Jaynes uses the term {\sl subjective} rather than {\sl contextual}. But  the word {\sl subjective} carries a lot of unwarranted connotations. We're not irrational, just ill-informed.}, in that one's assignment of probabilities depends on what you know. But objective in that different rational observers with the same information, model, and computational resources should come to the same conclusions, and assign the same probabilities to events.
+%
+
+%
+%Note thought that previously we were reasoning about a future event, but now we are reasoign about an event that has already occurred. The coin is now definatly either heads or tails up, but we don't 
+
+
+
+% Probabilites are not properties of a system iteslef, but rather our information about a system. They are contextual. But they're still physical, since that information is always encoded in some physical system. 
+% Further reading
+%    9. parameterized
+%    10. Readings: Monte hall, Jaynes?
+% On the Doctrine Of Chances
+
+
+\end{document}

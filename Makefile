@@ -23,7 +23,7 @@ edit:  ## Open all tex documents
 
 
 bib: ## Copy citations from master bibliogrpahy to local bib file
-	bibtool -s -d -x Lectures.aux ../../write/gec_bibliography/gec_bibliography.bib > Lectures_no_edit.bib
+	bibtool -s -d -x Lectures.aux ../../write/gec_bibliography/gec_bibliography.bib > Bib_no_edit.bib
 
 
 clean:	## Clean

@@ -13,3 +13,14 @@
 \newcommand{\work}{\ensuremath{W}}
 \newcommand{\heat}{\ensuremath{Q}}
 
+
+% Redefine logical operators to use words not cryptic symbols.
+\renewcommand{\land}{\mathbin{\text{and}}}
+\renewcommand{\lor}{\mathbin{\text{or}}}
+\renewcommand{\lnot}{{}\mathbin{\text{not}}{}}
+
+
+\let\Pr\relax
+\DeclareMathOperator{\Pr}{P}
+\newcommand{\given}{\mathrel{\vert} }
+\newcommand{\Given}{\bigm\vert}

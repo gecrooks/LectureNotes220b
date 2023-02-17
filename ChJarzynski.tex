@@ -1,0 +1,62 @@
+% !TEX encoding = UTF-8 Unicode 
+% !TEX TS-program = xelatex
+
+\documentclass[Lectures.tex]{subfiles}
+\begin{document}
+
+\clearpage
+\section{Jarzynski}
+
+
+\subsection{Markov's Inequality}
+
+Markov's inequality\footnote{Named after the same Russian mathematician as for Markov chains.} states that for a nonnegative random variable $X$ the probability of observing a value above some threshold $a$ is at most the mean of $X$ divided by the threshold
+\[
+P(X\geq a) \leq \frac{\langle X \rangle}{a} 
+\]
+The proof is straightforward.
+\begin{subequations}
+\begin{align}
+\langle X \rangle & =\int_{-\infty}^\infty P(x)\, x \, dx  = \int_0^\infty P(x)\, x \, dx \\
+& = \int_0^a P(x)\, x \, dx + \int_a^\infty P(x)\, x \, dx \\
+& \ge  \int_a^\infty P(x)\, x \, dx \\
+& \quad \ge\int_a^\infty P(x)\, a \, dx 
+\\
+& \qquad = a\int_a^\infty P(x) \, dx= a \operatorname{P}(X \ge a)
+\end{align}
+\end{subequations}
+(a) We write the mean for a non-negative variable; (b) Split the average into two parts, before and after the threshold; (c) and throw away the first part, which must be positive; (d) replace the variable with the threshold inside the average; and (e) pull the threshold from out of the integral, and recognize the remaining expression as the desired tail probability.
+
+% Chebyshev's inequality
+
+\subsection{Chernoff bound}
+Chernoff bound is an extension of Markov's inequality to all distributions, not just non-negative distributions.
+\[
+ P\left(X \geq a \right) \leq M_X(t)\ e^{-t a} \qquad \text{ for } t > 0
+\]
+where $M_X(t)$ is the moment generating function $\langle e^{t x}\rangle$. This inequality follows by applying Markov's inequality to $e^{tX}$, with $t$ positive.
+\begin{align*}
+ P\left(X \geq a \right) & =  P \left(e^{t X} \geq e^{t a}\right) \qquad \text{ for } t > 0 \\
+ & \leq \frac{\langle e^{t X}\rangle}{e^{+t a}} = M_X(t)\ e^{-t a} 
+\end{align*} 
+
+
+Similarly for the left tail we get 
+\[
+ P \left(X \leq a \right) \leq M_X(t)\ e^{-t a} \qquad \text{ for } t < 0
+\]
+
+
+\subsection{Bounds on entropy production}
+Given the Jarzynski identity $\langle e^{-\Sigma}\rangle=1$, we can apply the Chernoff bound to bound the probability that entropy decreases. 
+\begin{subequations}
+\begin{align}
+ P\left(\Sigma \leq \epsilon \right) &\leq \langle e^{+t\Sigma}\rangle\ e^{- t \epsilon} \quad \text{ for } t < 0 \\
+ & \leq \langle e^{-\Sigma}\rangle\ e^{+ \epsilon} \quad \text{ with } t = -1 \\
+ & \leq  e^{+ \epsilon}
+\end{align}
+\end{subequations}
+
+
+
+
